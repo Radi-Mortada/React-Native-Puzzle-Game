@@ -1,18 +1,28 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 import { Metrics, ApplicationStyles } from '../../Themes/'
 
-export default StyleSheet.create({
-  ...ApplicationStyles.screen,
+const { width , height} = Dimensions.get('window')
+const BOX_SIZE = width /3
+
+const styles = StyleSheet.create({
   container: {
-    paddingBottom: Metrics.baseMargin
+    flex: 1,
+    backgroundColor: '#F5FCFF'
   },
-  logo: {
-    marginTop: Metrics.doubleSection,
-    height: Metrics.images.logo,
-    width: Metrics.images.logo,
-    resizeMode: 'contain'
+  list: {
+    justifyContent: 'center',
+    flexDirection: 'row',
+    flexWrap: 'wrap'
   },
-  centered: {
-    alignItems: 'center'
+  box: {
+    width: BOX_SIZE,
+    height: height / 3,
+    borderColor: '#F5FCFF',
+    backgroundColor: 'gray',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })
+
+
+export default styles

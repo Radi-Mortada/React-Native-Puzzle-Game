@@ -19,7 +19,18 @@ const images = {
   chevronRight: require('../Images/Icons/chevron-right.png'),
   hamburger: require('../Images/Icons/hamburger.png'),
   backButton: require('../Images/Icons/back-button.png'),
-  closeButton: require('../Images/Icons/close-button.png')
+  closeButton: require('../Images/Icons/close-button.png'),
+  catPuzzle: [
+    require('../Images/Puzzles/Cat/image_part_001.png'),
+    require('../Images/Puzzles/Cat/image_part_002.png'),
+    require('../Images/Puzzles/Cat/image_part_003.png'),
+    require('../Images/Puzzles/Cat/image_part_004.png'),
+    require('../Images/Puzzles/Cat/image_part_005.png'),
+    require('../Images/Puzzles/Cat/image_part_006.png'),
+    require('../Images/Puzzles/Cat/image_part_007.png'),
+    require('../Images/Puzzles/Cat/image_part_008.png'),
+    require('../Images/Puzzles/Cat/image_part_009.png')
+  ]
 }
 
 export default images
