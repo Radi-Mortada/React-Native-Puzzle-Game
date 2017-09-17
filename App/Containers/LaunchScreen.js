@@ -11,6 +11,7 @@ import {
 import { connect } from 'react-redux'
 import styles from './Styles/LaunchScreenStyles'
 import GameActions from '../Redux/GameMainRedux'
+import _ from 'lodash'
 // import { PanGestureHandler, State } from 'react-native-gesture-handler'
 const USE_NATIVE_DRIVER = false
 
@@ -29,6 +30,14 @@ export class LaunchScreen extends Component {
   componentWillMount () {
     this.props.getData()
   }
+  componentWillReceiveProps(nextProps) {
+    let fArray = _.map(this.props.oldBoxesArray, 'id')
+    let cArray = _.map(nextProps.currentBoxesArray, 'id')
+    if(_.isEqual(fArray,cArray)){
+      alert('Yaaaaaaaaaaay !!!')
+      this.props.getData()
+    }
+  }
 
   _keyExtractor = (item, index) => item.id
 
@@ -37,11 +46,11 @@ export class LaunchScreen extends Component {
       return (
         <TouchableOpacity
           onPress={() => {
-            this.props.setNext(!index || index === 0 ? '0' : index)
+            this.props.setNext(index)
           }}
           style={styles.box}
         >
-          <Image source={i.img} />
+          <Image source={i.img} resizeMode='cover' style={styles.img} />
         </TouchableOpacity>
       )
     } else {

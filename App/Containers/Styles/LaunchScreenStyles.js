@@ -21,6 +21,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'gray',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  img: {
+    width: BOX_SIZE,
+    height: height / 3
   }
 })
 

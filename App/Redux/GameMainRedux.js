@@ -27,12 +27,12 @@ export const INITIAL_STATE = Immutable({
 
 export const request = state => {
   let boxesArray = []
-  for (var index = 0; index < 9; index++) {
+  for (var index = 1; index < 10; index++) {
     boxesArray.push({
       id: index,
       title: `B${index}`,
-      empty: index == 8,
-      img: index !== 8 ? Images.catPuzzle[index] : null
+      empty: index == 9,
+      img: index !== 9 ? Images.catPuzzle[index-1] : null
     })
   }
 
@@ -48,17 +48,20 @@ export const setNext = (state, action) => {
   if(!state.emptyIndex){
     state.currentBoxesArray.map((bx,index) => {if(bx.empty) emptyIndex = index})
   }
+
   return state.merge({
     currentBoxesArray: state.currentBoxesArray.map((box, index) => {
       if (index == emptyIndex) {
         return {
           ...box,
+          id: state.currentBoxesArray[nextIndex].id,
           img: state.currentBoxesArray[nextIndex].img,
           empty: !box.empty
         }
       } else if (index === nextIndex) {
         return {
           ...box,
+          id: state.currentBoxesArray[emptyIndex].id,           
           img: state.currentBoxesArray[emptyIndex].img,          
           empty: !box.empty
         }
