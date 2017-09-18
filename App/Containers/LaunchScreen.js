@@ -38,7 +38,7 @@ export class LaunchScreen extends Component {
     let cArray = _.map(nextProps.currentBoxesArray, 'id')
     if (_.isEqual(fArray, cArray)) {
       alert('Yaaaaaaaaaaay !!!')
-      this.props.getData()
+      // this.props.getData()
     }
   }
 
