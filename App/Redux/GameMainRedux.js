@@ -27,6 +27,7 @@ export const INITIAL_STATE = Immutable({
 
 export const request = state => {
   let boxesArray = []
+  let emptyI = null
   for (var index = 1; index < 10; index++) {
     boxesArray.push({
       id: index,
@@ -35,10 +36,17 @@ export const request = state => {
       img: index !== 9 ? Images.catPuzzle[index-1] : null
     })
   }
+  let randomize =  _.shuffle(boxesArray)
+  randomize.map((item, i) => {
+    if(item.empty){
+      emptyI = i
+    }
+  })
 
   return state.merge({
     oldBoxesArray: boxesArray,
-    currentBoxesArray: _.shuffle(boxesArray)
+    currentBoxesArray: randomize,
+    emptyIndex : emptyI
   })
 }
 
@@ -73,26 +81,7 @@ export const setNext = (state, action) => {
 }
 
 export const move = (state, action) => {
-  const { emptyIndex } = action
-  return state.merge({
-    currentBoxesArray: state.currentBoxesArray.map((box, index) => {
-      if (index == emptyIndex) {
-        return {
-          ...box,
-          img: state.currentBoxesArray[state.nextIndex].img,
-          empty: !box.empty
-        }
-      } else if (index === state.nextIndex) {
-        return {
-          ...box,
-          img: state.currentBoxesArray[emptyIndex].img,          
-          empty: !box.empty
-        }
-      }
-      return box
-    }),
-    emptyIndex: state.nextIndex
-  })
+return state
 }
 /* ------------- Hookup Reducers To Types ------------- */
 

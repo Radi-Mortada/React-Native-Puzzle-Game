@@ -5,12 +5,14 @@ import {
   View,
   FlatList,
   Text,
-  TouchableOpacity,
+  TouchableWithoutFeedback,
   Image
 } from 'react-native'
 import { connect } from 'react-redux'
+import * as Animatable from 'react-native-animatable'
 import styles from './Styles/LaunchScreenStyles'
 import GameActions from '../Redux/GameMainRedux'
+import { Images } from '../Themes'
 import _ from 'lodash'
 // import { PanGestureHandler, State } from 'react-native-gesture-handler'
 const USE_NATIVE_DRIVER = false
@@ -18,6 +20,7 @@ const USE_NATIVE_DRIVER = false
 export class LaunchScreen extends Component {
   constructor () {
     super()
+    this.image = []
     this.state = {
       oldBoxesArray: [],
       shuffledBoxesArray: [],
@@ -30,10 +33,10 @@ export class LaunchScreen extends Component {
   componentWillMount () {
     this.props.getData()
   }
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     let fArray = _.map(this.props.oldBoxesArray, 'id')
     let cArray = _.map(nextProps.currentBoxesArray, 'id')
-    if(_.isEqual(fArray,cArray)){
+    if (_.isEqual(fArray, cArray)) {
       alert('Yaaaaaaaaaaay !!!')
       this.props.getData()
     }
@@ -41,28 +44,65 @@ export class LaunchScreen extends Component {
 
   _keyExtractor = (item, index) => item.id
 
+  checkMovable = (index) => {
+    if(index == 3 && this.props.emptyIndex == 2 || index == 2 && this.props.emptyIndex == 3 || index == 6 && this.props.emptyIndex == 5){
+      return false
+    }
+    if(index === this.props.emptyIndex + 1 || index === this.props.emptyIndex - 1 || index === this.props.emptyIndex +3 || index === this.props.emptyIndex -3){
+      return true
+    }
+  }
+
   renderItem = (i, index) => {
     if (!i.empty) {
       return (
-        <TouchableOpacity
+        <TouchableWithoutFeedback
           onPress={() => {
-            this.props.setNext(index)
+            if (this.checkMovable(index)) {
+              this.props.setNext(index)
+              this.image[index].rubberBand(800)
+              this.props.emptyIndex
+                ? this.image[this.props.emptyIndex].rubberBand(800)
+                : null
+            }
           }}
           style={styles.box}
         >
-          <Image source={i.img} resizeMode='cover' style={styles.img} />
-        </TouchableOpacity>
+          <Animatable.View
+            easing='ease-out'
+            ref={ref => {
+              this.image[index] = ref
+            }}
+          >
+            <Image source={i.img} resizeMode='cover' style={styles.img} />
+          </Animatable.View>
+        </TouchableWithoutFeedback>
       )
     } else {
       return (
-        <TouchableOpacity
+        <TouchableWithoutFeedback
           onPress={() => {
-            {/* this.props.move(index === 0 || !index ? '0' : index) */}
+            {
+              /* this.props.move(index === 0 || !index ? '0' : index) */
+            }
           }}
-          style={[styles.box, { backgroundColor: 'white' }]}
+          style={[styles.box, { backgroundColor: 'black' }]}
         >
+          <Animatable.View
+            style={styles.img}
+            easing='ease-out'
+            ref={ref => {
+              this.image[index] = ref
+            }}
+          >
+            <Image
+              source={Images.qMark}
+              resizeMode='contain'
+              style={styles.img}
+            />
+          </Animatable.View>
 
-        </TouchableOpacity>
+        </TouchableWithoutFeedback>
       )
     }
   }
@@ -87,8 +127,7 @@ const mapStateToProps = ({ gameMain }) => ({
 
 const mapDispatchToProps = dispatch => ({
   getData: () => dispatch(GameActions.gameMainRequest()),
-  setNext: val => dispatch(GameActions.gameMainSetNext(val)),
-  move: val => dispatch(GameActions.gameMainMove(val))
+  setNext: val => dispatch(GameActions.gameMainSetNext(val))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LaunchScreen)
