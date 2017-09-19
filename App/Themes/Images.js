@@ -30,7 +30,9 @@ const images = {
     require('../Images/Puzzles/Cat/image_part_007.png'),
     require('../Images/Puzzles/Cat/image_part_008.png'),
     require('../Images/Puzzles/Cat/image_part_009.png')
-  ]
+  ],
+  exMark: require('../Images/Puzzles/exMark.png'),
+  qMark: require('../Images/Puzzles/qMark.png')
 }
 
 export default images

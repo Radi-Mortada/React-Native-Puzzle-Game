@@ -7,7 +7,7 @@ const BOX_SIZE = width /3
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF'
+    backgroundColor: 'black'
   },
   list: {
     justifyContent: 'center',
@@ -17,8 +17,6 @@ const styles = StyleSheet.create({
   box: {
     width: BOX_SIZE,
     height: height / 3,
-    borderColor: '#F5FCFF',
-    backgroundColor: 'gray',
     alignItems: 'center',
     justifyContent: 'center'
   },
