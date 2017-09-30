@@ -3,6 +3,11 @@
 
 * Standard compliant React Native App Utilizing [Ignite](https://github.com/infinitered/ignite)
 
+
+## :arrow_up: Demo
+![Demo](https://github.com/Radi-Mortada/React-Native-Puzzle-Game/tree/master/App/Images/demo.gif "Demo")
+
+
 ## :arrow_up: How to Setup
 
 **Step 1:** git clone this repo:
