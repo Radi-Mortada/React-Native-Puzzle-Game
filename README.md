@@ -5,7 +5,7 @@
 
 
 ## :arrow_up: Demo
-![Demo](https://github.com/Radi-Mortada/React-Native-Puzzle-Game/tree/master/App/Images/demo.gif "Demo")
+![](https://github.com/Radi-Mortada/React-Native-Puzzle-Game/tree/master/App/Images/demo.gif)
 
 
 ## :arrow_up: How to Setup
